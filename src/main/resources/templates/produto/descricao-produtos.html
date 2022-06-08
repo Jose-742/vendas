@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+<head>
+<meta charset="utf-8">
+</head>
+<body>
+	<div class="container layout-card" layout:fragment="corpo">
+		<div class="row">
+			<div class="col-sm-6">
+				<img class="card-img-top"  th:src="|/produtos/imagem/${produto.id}|"alt="imagem do Produto">
+			</div>
+			<div class="col-sm-4 padi">
+				<h3 th:text="${produto.descricao}">descricao</h3>						
+				<div class="row">					
+					<div class="col-sm-12">
+							<br>
+						<form th:action="@{/vendas/add}" th:object="${item}" method="Post">
+						<input type="hidden" th:value="${produto.id}" th:name="produto.id">
+							<div class="card-footer" sec:authorize="hasRole('USER')">
+								<button type="submit" class="btn btn-warning btn-Largo">Adicionar ao Carrinho <i class="fas fa-cart-plus"></i></button>
+							</div>
+							<div class="card-footer" sec:authorize="hasRole('ROLE_ANONYMOUS')">
+								<button type="submit" class="btn btn-warning btn-Largo">Adicionar ao Carrinho <i class="fas fa-cart-plus"></i></button>
+							</div>
+						</form>					
+							<br><br>
+					</div>
+					<div class="col-sm-6">
+						
+						<h4 class="badge badge-primary valorPrecoDescricao" th:text="|R$ ${{produto.valor}}|">R$ 3.750,90</h4>
+					</div>
+				</div>
+				
+			</div>
+		</div>		
+	</div>
+</body>
+</html>

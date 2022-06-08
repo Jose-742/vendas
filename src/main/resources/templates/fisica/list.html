@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+<head><meta charset="utf-8"></head>
+<body>
+		<section class="container-produtos" layout:fragment="corpo">
+			<h4 class="sub-titulo">Lista de Usuários</h4>
+				<p>
+					<i class="oi oi-magnifying-glass"></i> <button class="btn btn-primary" id="mostrarNome">Nomes</button>
+				</p>
+				<div id="nomePesquisa">			 	
+				 	 	<form th:action="@{/fisicas/buscar/nome}" method="Post">
+				 	 		<div class="form-row">
+					 	 		<div class="form-group col-md-2">
+					 	 			<input class="form-control" type="text" name="nome" placeholder="Digite o Nome"> 
+					 	 		</div>
+					 	 		<div class="form-group col-md-6">
+					 	 			<button type="submit" class="btn btn-outline-success">search</button>
+					 	 		</div>
+					 	 	</div>
+					 	</form>
+				</div>
+			<section class="listaVenda" style="background-color: white;">
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<th scope="col">#</th>
+							<th scope="col">Nome</th>
+							<th scope="col">CPF</th>	
+							<th scope="col">Email</th>
+							<th scope="col">Perfil</th>													
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="cliente : ${clientesFisicos}">
+							<th scope="row" th:text="${cliente.id}">1</th>						
+							<td th:text="${cliente.nome}">Cliente</td>
+							<td th:text="${cliente.cpf}">cpf</td>
+							<td th:text="${cliente.usuario.email}">email</td>
+							<td>
+								<p th:each="perfil : ${cliente.usuario.perfil}" 
+								th:text="${#strings.replace(perfil.descricao,'ROLE_','')}"></p> 
+							</td>						
+						</tr>
+					</tbody>
+				</table>
+			</section>
+			<a href="/home" class="btn btn-danger">Voltar</a>
+		</section>
+</body>
+</html>
