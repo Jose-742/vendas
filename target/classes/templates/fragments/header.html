@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+	<header class="conteiner" th:fragment="cabecalho">
+		<!--Inicio do Menu-->
+		<nav class="navbar  navbar-expand-lg navbar-dark bg-dark">
+			<div class="container-fluid">
+				<!-- Logo -->
+				<a href="/" class="navbar-brand " id="logo"><img
+					src="/img/logo.png" alt="" width="50" height="50"> Wolf</a>
+
+				<!-- Menu Hamburguer -->
+				<button class="navbar-toggler" data-toggle="collapse"
+					data-target="#navegacao">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+						
+
+				<!-- Busca -->
+				<div class="collapse navbar-collapse" id="navegacao">
+					
+					<div class="layt">			
+						<form th:action="@{/produtos/busca}" id="form-autocomplete">
+							<div class="input-group ">
+								<input id="pesquisa" type="search" name="descricao"
+								 class="form-control form-control" placeholder="busque aqui seu produto">
+								<span  class="input-group-btn">
+									<button id="buttonP" type="submit" class="btn btn-primary "><i class="fas fa-search"></i></button>
+								</span>						
+							</div>
+						</form> 
+				
+					</div>
+					
+					<ul class="navbar-nav ml-auto">
+						
+						<li class="nav-item"><a href="/login" class="nav-link houver" sec:authorize="!isAuthenticated()">
+							<i class="fas fa-user"></i> Login ou Cadastre-se</a>
+						</li>
+						<li class="nav-item"><a th:href="@{/fisicas/list}" class="nav-link houver" sec:authorize="hasRole('ADMIN')">
+							<i class="fas fa-user"></i> Usuarios</a>
+						</li>
+								
+						<li class="nav-item" sec:authorize="hasRole('ADMIN')"><a href="/produtos/form"
+							class="nav-link"><i class="fas fa-ad"></i> Cadastrar</a></li>
+						<li class="nav-item"><a href="/produtos/list"
+							class="nav-link"><i class="fas fa-list-alt"></i> Produtos</a></li>
+							<!-- CARRINHO ANONIMO -->
+						<li class="nav-item"><a href="/vendas/carrinho" 
+							class="nav-link" sec:authorize="hasRole('ROLE_ANONYMOUS')"><i class="fas fa-shopping-cart"></i>
+								Carrinho <span th:if="${session.venda}  != null "> <span
+									th:if="${session.venda.itemVendas.size} > 0"> (<b
+										id="qtdCarinho" th:text="${session.venda.itemVendas.size}"></b>)
+								</span>
+							</span></a></li>
+							<!-- CARRINHO USUARIOS -->
+						<li class="nav-item"><a href="/vendas/carrinho"
+						class="nav-link" sec:authorize="hasRole('USER')"><i class="fas fa-shopping-cart"></i>
+							Carrinho <span th:if="${session.venda}  != null "> <span
+								th:if="${session.venda.itemVendas.size} > 0"> (<b
+									id="qtdCarinho" th:text="${session.venda.itemVendas.size}"></b>)
+							</span>
+						</span></a></li>
+							
+						<li class="nav-item" sec:authorize="hasRole('ADMIN')"><a href="/vendas/list" class="nav-link"><i
+								class="fas fa-receipt"></i> Vendas</a></li>
+						<li class="nav-item" sec:authorize="isAuthenticated()">
+						
+						<li class="nav-item" sec:authorize="hasRole('USER')"><a href="/vendas/compras/list" class="nav-link"><i
+								class="fas fa-receipt"></i> Compras</a></li>
+						<li class="nav-item" sec:authorize="isAuthenticated()">
+						
+		 				<form th:action="@{/logout}" sec:authorize="isAuthenticated()"
+					  			method="post"  class="form-inline mt-2 mt-md-0">
+		 					<div class="btn-group mb-1 mr-sm-1">
+								<button type="button" class="btn btn-light">
+									<i class="fas fa-user"></i> <span class=""
+										sec:authentication="name">Nome</span>
+								</button>
+								<button type="button"
+									class="btn btn-danger dropdown-toggle dropdown-toggle-split"
+									data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								</button> 
+								<div class="dropdown-menu">
+									
+									<span sec:authorize="hasRole('USER')">
+										<a th:href="@{/fisicas/edit/Cliente}" class="dropdown-item" >Configuração</a>
+									</span>
+									<span sec:authorize="hasRole('USER')">
+										<a th:href="@{/fisicas/adresses}" class="dropdown-item" >Endereços</a>
+									</span>
+									<button type="submit" class="dropdown-item">Sair</button>																								
+								</div>
+								
+							</div>
+						</form>
+						
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</header> 
+</body>
+</html>

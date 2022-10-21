@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+<head>
+<meta charset="utf-8">
+</head>
+<body>
+	<section class="container-produtos" layout:fragment="corpo">
+		<h4 class="sub-titulo">Detalhes dos Produtos</h4>
+		<table class="table">
+			<thead class="thead">
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Produto</th>
+					<th scope="col">Quantidade</th>
+					<th scope="col">Preço</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="itemVenda : ${venda.itemVendas}">
+
+					<th scope="row" th:text="${itemVenda.produto.id}">1</th>
+					<td>
+						<div class="produto">
+						<img class="imagemList"  th:src="|/produtos/imagem/${itemVenda.produto.id}|"alt="imagem do Produto">
+							<p class="text" th:text="${itemVenda.produto.descricao}">
+								Processador i3 10° Geração 3.37GHz <br>
+							</p>
+						</div>
+					</td>
+					<td>
+						<div class="divQtd">
+							<p class="text" th:text="${itemVenda.quantidade}">
+								<br>
+							</p>
+						</div>
+
+					</td>
+					<td>
+						<div class="divQtd">
+							<b class=""
+								th:text="${#numbers.formatCurrency(itemVenda.valorAbsoluto)}">1x 600,90</b>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="row">
+			<div>
+				<p>
+					<b>Nome:</b> <span th:text="${venda.clientePF.nome}"></span>
+				</p>
+				<p>
+					<b>Data da Compra:</b>
+					<samp th:text="${#temporals.format(venda.data, 'dd/MM/yyyy')}"></samp>
+				</p>
+				<p>
+					<b>Forma de Pagamento:</b> <span th:text="${venda.formaPagamento}"></span>
+				</p>
+				<p>
+					<b>Endereço de Entrega:</b>
+				</p>
+				<div class="divQtd">
+					<spam th:text="${venda.enderecoEntrega.logradouro}">logradouro</spam>
+					<br>
+					<spam th:text="${venda.enderecoEntrega.bairro}">bairro</spam>
+					<br>
+					<spam th:text="${venda.enderecoEntrega.localidade}">localidade</spam>
+					<br>
+					<spam th:text="${venda.enderecoEntrega.uf}">uf</spam>
+					<br>
+					<spam th:text="${venda.enderecoEntrega.cep}">cep</spam>
+					<br>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12">
+				<h3 class="sub-titulo">
+					Total: <span class="btotal"
+						th:text="${#numbers.formatCurrency(venda.total())}"></span>
+				</h3>
+			</div>
+			<div class="col-12">
+				<a class="btn btn-danger  mt-5" th:href="@{/vendas/list} "  sec:authorize="hasRole('ADMIN')">Voltar</a>
+				<a class="btn btn-danger  mt-5" th:href="@{/vendas/compras/list}"  sec:authorize="hasRole('USER')">Voltar</a>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

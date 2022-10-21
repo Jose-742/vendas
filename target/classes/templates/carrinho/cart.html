@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+<head>
+<meta charset="utf-8">
+</head>
+<body>
+<div class="layout-carrinho" layout:fragment="corpo"> 
+		<h4 class="sub-titulo"><i class="fas fa-shopping-cart"></i> Meu Carrinho</h4>          
+		<div th:replace="fragments/alert"></div><!-- alerta de validação -->
+		
+            <table class="table">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Descrição</th>
+                    <th scope="col">Quantidade</th>
+                    <th scope="col">Preço</th>
+                    <th scope="col">Deletar</th>                    
+                  </tr>
+                </thead> 
+                <tbody >
+                  <tr th:each="sessao, i : ${session.venda.itemVendas}">
+                    <th scope="row" th:text="${sessao.produto.id}" >2</th>
+                    <td>     
+                    	<img class="imagemList"  th:src="|/produtos/imagem/${sessao.produto.id}|"alt="imagem do Produto"> 
+                        <p class="text" th:text="${sessao.produto.descricao}">Memoria Ram 16gb 3000mhz  <br></p>
+                   </td>
+                    <td class="divQtd">
+                            <a class="btn btn-sm btn-info btnMinus" role="button"
+								th:href="@{/vendas/alterarQuantidade/{index}/{acao} (index=${i.index}, acao=${0})}"><i
+								class="fa fa-minus"></i></a>  
+													
+							<b class="qtdSpan" th:text="${sessao.quantidade}">1</b> 
+													
+							<a class="btn btn-sm btn-info btnPlus" role="button"
+								th:href="@{/vendas/alterarQuantidade/{index}/{acao} (index=${i.index}, acao=${1})}"><i
+								class="fa fa-plus"></i></a> 
+                    </td>
+                    <td class="divQtd"> 
+                            <b class="" th:text="${#numbers.formatCurrency(sessao.produto.valor * sessao.quantidade)}">1 x 1000,90</b>
+                    </td>
+                    <td class="divQtd">                       
+                          <a th:href="@{/vendas/remover/{index} (index=${i.index})}"><i class="fas fa-trash lixeira"></i></a>                     
+                    </td>
+                  </tr>            
+                </tbody>
+              </table>              
+                      
+              
+              <section  th:if="${session.venda}  != null ">
+              		<section th:if="${session.venda.itemVendas.size} > 0" > 
+	           			 <div class="divTotal">         		
+			                <span>Total:</span>
+			                <span th:if="${session.venda}  != null ">
+								<b class="btotal" th:text="${#numbers.formatCurrency(session.venda.total())}"></b>
+							</span>
+			                <a class="btn btn-success btn-lg" th:href="@{/vendas/pagamento}">Finalizar compra <i class="fas fa-check"></i></a>
+	           			</div>
+              		
+              		</section>
+              </section>   
+              
+        </div>
+</body>
+</html>

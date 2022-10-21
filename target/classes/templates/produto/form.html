@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html  layout:decorate="~{layout}">
+<head><meta charset="utf-8"></head>
+<body>
+	<div class="container-produtos" layout:fragment="corpo"> 
+           <section class="formulario" > 
+                <h4 class="sub-titulo">Formulário de Cadastro</h4>
+                <form th:action="${produto.id == null} ? @{/produtos/save} : @{/produtos/update}" th:object="${produto}" method="POST" enctype="multipart/form-data">
+                
+                	<div th:replace="fragments/alert"></div>
+			         <div th:replace="fragments/validacao :: validacao"></div> 
+                
+                    <div class="form-group">
+                         <input type="hidden" th:field="*{id}" >
+                        <label for="descricao" class="col-sm-2 col-form-label col-form-label-lg">Descrição</label>
+                        <input type="text" class="form-control form-control-lg" id="descricao" placeholder="Nome do Produto"
+			                    	th:field="*{descricao}">
+                        <small class="form-text text-muted">Insira a descrição do produto.</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="imagem" class="col-sm-2 col-form-label col-form-label-lg">Imagem</label>
+                        
+                        <div class="custom-file">
+						    <input type="file" name="file" class="form-control-file" id="botaoUpload" accept=".jpg">
+						 </div>
+						
+                         <small class="form-text text-muted">Insira a imagem do produto.</small> 
+                    </div>
+                                      
+                    <div class="form-group">
+                        <label for="valor" class="col-sm-2 col-form-label col-form-label-lg">Valor</label>
+                        <input type="text" id="valor" class="form-control form-control-lg" placeholder="R$ 0.000,00"
+			                      th:field="*{valor}">
+                        <small class="form-text text-muted">Insira o valor do produto.</small>
+                    </div>
+                        
+                    <div class="form-group">                     
+                        <button type="submit" id="enviar" class="btn btn-success btn-lg">CADASTRAR</button>                       
+                    </div>
+                </form>
+            </section>
+        </div>
+</body>
+</html>
