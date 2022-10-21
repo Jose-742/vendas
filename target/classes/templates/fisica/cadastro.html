@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-br"
+ 	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"> 
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscrever-se | Notepad</title>
+   
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<!--Icone no topo da nova guia-->
+<link rel="icon" href="/img/logo.png" >
+
+<link rel="stylesheet" href="/style/estilo_formulario.css">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row justify-content-start ">
+            <div class="col-sm-5 cor">
+                <section class="msgindex">
+                   <h2><a href="/" class="linkHome">Bem-Vindo a Loja <img alt="Loga" src="/img/logo.png"></a></h2>
+                    <span class="span">Sem complicação! Compre na loja e ganhe 10% de desconto</span>
+                </section>
+            </div>
+             <div class="col-sm-7 cor2">
+              <section class="form">
+                    <h1 class="title" >Inscrever-se</h1>
+                    <form th:action="${clientePF.id == null} ? @{/fisicas/save} : @{/fisicas/update}" method="POST" th:object="${clientePF}">
+                    
+		                    <div th:replace="fragments/alert"></div>
+					         <div th:replace="fragments/validacao :: validacao"></div> 
+                    
+                        <div class="form-group mb-3">
+                        	<input type="hidden" th:field="*{id}" >
+                            <input type="text" class="form-control form-control-lg"  placeholder="Nome" th:field="*{nome}">
+                        </div>
+                        <div class="form-group mb-3">
+                        <input type="hidden" th:field="*{usuario.id}" >
+                            <input type="email" class="form-control form-control-lg"  placeholder="E-mail" th:field="*{usuario.email}">
+                        </div>
+                        <div class="form-group mb-3">
+                            <input type="text" class="form-control form-control-lg" id="cpf" placeholder="CPF" th:field="*{cpf}" autocomplete="off">
+                        </div>                 
+                        <div class="form-group mb-3 submit-line">
+                            <input type="password" class="form-control form-control-lg" id="senha"
+                             placeholder="Senha" th:field="*{usuario.senha}">
+                             
+                             <button type="button" id="mostrar"  class="submit-lente ">
+							   		<i>&#128477;</i>
+							  </button>
+                        </div>
+                        <div class="form-group mb-3">
+                            <span>Já tem uma conta? <a th:href="@{/login}">Entrar!</a></span>
+                            <button type="submit" class="btn btn-primary btn-lg">Inscrever-se</button>
+                        </div>
+                    </form> 
+                
+              </section>
+        </div>
+	</div>
+    </div>
+       
+    <!-- JavaScript (Opcional) -->
+    <!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+        
+        <!--  maskara cpf-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.13.4/jquery.mask.min.js"></script>
+        
+  <script src="/script/codigo-formulario.js"></script>
+ 
+</body>
+
+</html>

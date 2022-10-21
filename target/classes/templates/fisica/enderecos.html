@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+<head><meta charset="UTF-8"></head>
+<body>
+    <section class="container-produtos" layout:fragment="corpo"> 
+    	<section class="container">
+    	
+          <div class="row layoutCep">            
+            <div class="col-sm-6">
+                <h1>Busca Cep</h1>
+
+				<div th:replace="fragments/alert"></div> 
+				
+                <form class="">
+               	 	
+	                <div class="row">
+	                	<div class="col-sm-9">
+	                            <input type="number" class="form-control" id="cep" placeholder="Digite um CEP">
+	                    </div>
+	                    <div class="col-sm-3">
+	                        <button type="button" id="buscarCep" class="btn btn-primary mb-2">buscar</button>
+	                    </div>
+	                </div>                  
+                </form>
+            </div>
+            
+            <div class="col-sm-6">
+            	<div id="loader-img" class="mx-auto loader"></div>
+            		
+                 <form th:action="@{/fisicas/adresses/save}"
+                  				 method="POST" th:object="${enderecos}" id="formEndereco">    					
+					           
+                        <input type="text" class="form-control"  name="logradouro" id="logradouro" readonly>
+                       <br>         
+                        <input type="text" class="form-control" name="bairro" id="bairro" readonly>
+                     <br>           
+                        <input type="text" class="form-control" name="localidade" id="localidade" readonly>
+                       <br>
+                        <input type="text" class="form-control" name="uf" id="uf" readonly>
+                       <br>
+                        <input type="text" class="form-control" name="cep" id="cepInput" readonly>  
+                       <br>
+                        <button type="submit" class="btn btn-secondary">Adicionar</button>
+                  </form> 
+                <br>
+            </div>
+           
+            <div class=" col-sm-12 mt-5">
+                <table class="table">
+                    <thead class="table-primary"><!-- clientePF -->
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Logradouro/Nome</th>
+                            <th scope="col">Bairro/Distrito</th>
+                            <th scope="col">Localidade</th>
+                            <th scope="col">UF</th>
+                            <th scope="col">CEP</th>
+                            <th scope="col">Deletar</th>
+                        </tr>
+                    </thead>
+                     
+                    <tbody>
+                        <tr th:each="endereco : ${enderecos}">
+                            <th scope="row" th:text="${endereco.id}">1</th>
+                            <td th:text="${endereco.logradouro}">Quadra ARNO 43 Alameda 6</td>
+                            <td th:text="${endereco.bairro}">Plano Diretor Norte</td>
+                            <td th:text="${endereco.localidade}">Palmas/TO</td>
+                            <td th:text="${endereco.uf}">Palmas/TO</td>
+                            <td th:text="${endereco.cep}">77001-562</td><!-- /remove/{id} -->
+                            <td>
+                             	<a th:href="@{/fisicas/adresses/remove/{id} (id=${endereco.id})}" 
+		                                    onclick="return window.confirm('Tem certeza que deseja excluir este Endereço?')"><i class="fas fa-trash lixeira"></i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+          </div>
+          </section>
+         
+    </section>
+</body>
+</html>

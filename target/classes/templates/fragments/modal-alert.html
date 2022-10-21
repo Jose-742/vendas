@@ -1,0 +1,28 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8">
+<body>
+	<!-- Modal -->
+	<div th:fragment="modal-alert"
+			class="modal fade" id="modal-alert" tabindex="-1" role="dialog" 
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel"><span><i class="fas fa-exclamation-triangle"></i> Atenção</span></h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body" id="mensagem">
+	        Mensagem para o usuario
+	      </div>
+	      <div class="modal-footer">
+	        <button  type="button" data-dismiss="modal" class="btn btn-primary">OK</button> 
+	      </div>
+	    </div>
+	  </div>
+	</div>
+</body>
+</html>

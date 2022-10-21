@@ -1,0 +1,125 @@
+body{
+       color: rgb(126, 123, 123);
+    }
+    .cor{
+        /*background-color: rgb(55, 88, 213);*/
+        background-color:#212529;
+        color: #ffff;
+        height: 100vh;
+        display:flex;
+         align-items: stretch;
+    }
+    .cor2{
+       background-color: #ffff;
+       /* border: 1px solid black;       */
+        height: 50vh;
+        margin-top: 7.5%;/*margin-top: 10%;*/
+        padding: 15px;
+    }
+    .span{
+        color: rgb(197, 207, 244);
+        font-size: 1.2em;
+        
+    }
+    .msgindex{
+        /*border:  1px solid red;*/
+        height: 50vh;
+        width: 100%;
+        margin-top: 20%;/*margin-top: 25%;*/
+        padding: 60px;
+        padding-top: 25%;
+    }
+
+    .title{
+        text-align: center;
+        color: rgb(126, 123, 123);
+    }
+ 
+    .form{
+        /*border: 1px solid blue;*/
+        padding: 10px;
+        margin: 0 auto;
+        width: 55%;
+    }
+    .form-control{
+        padding: 13px;
+    }
+    .btn-lg{
+        float: right;
+        width: 150px;
+    }
+    @media screen and (max-width: 575px) {
+        .cor{
+            background-color: rgb(55, 88, 213);
+            color: #ffff;
+            height: 200px;
+            display:flex;
+            align-items: stretch;
+        }
+        .msgindex{
+    
+        height: 0;
+        width: 100%;
+        text-align: center;
+        margin-top: 0;
+        padding: 8px;
+        padding-top: 9px;
+     }
+     .form{
+        /*border: 1px solid blue;*/
+        padding: 4px;
+        margin: 0 auto;
+        width: 100%;
+    }
+    .btn-lg{
+        float: left;
+        margin: 0;
+        margin-top: 10px;
+        width: 100%;
+    }
+    span{
+        float: left;
+    }
+}
+
+.response{
+    margin-top: 5%;
+    color: red;
+    text-align: center;
+}
+
+/*ICONE NO INPUT DA SENHA*/
+.submit-lente {
+  position:absolute;
+  top:0; right:0;
+  z-index:10;
+  border:none;
+  background:transparent;
+  outline:none;
+}
+
+.submit-line {
+  position: relative;
+  /*width: 200px;*/
+}
+
+.submit-line input {
+  width: 100%;
+}
+#mostrar{
+	margin:0 auto;
+	margin-top: 13px;
+}
+#mostrar:hover {
+	background-color:#F2F2F2;
+}
+
+.linkHome{
+	color: white;
+	text-decoration: none;
+}
+.linkHome:hover {
+	color: white;
+	font-weight: bold;
+	text-decoration: none;
+}

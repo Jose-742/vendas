@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+<head><meta charset="utf-8"></head>
+<body>
+		<section class="container layoutPagamento" layout:fragment="corpo">
+			<h2>Confira e finalize seu pedido</h2>
+        
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-6">     
+                   		 <b>Endereço de entrega</b> <a href="/fisicas/adresses">adicionar</a>      
+                   		              
+                        <ul class="listEnderecos" th:each="endereco : ${enderecos}">                     	
+                        	<li th:text="${venda.clientePF.nome}">JOSE NATAL RODRIGUES</li>
+                        	<li th:text="${endereco.logradouro}">Quadra ARNO 43 Alameda 6 46</li>
+                        	<li th:text="${endereco.bairro}">Plano Diretor Norte</li>
+                        	<li th:text="${endereco.localidade}">Palmas</li>
+                        	<li th:text="${endereco.uf}">TO</li>
+                        	<li th:text="${endereco.cep}">77001562</li>
+                        	<li>
+                       		<input class="form-check-input endereco" name="endereco" type="radio" th:value="${endereco.id}">
+                                <label for="endereco"><strong>Adicionar endereço</strong></label>
+                        	</li>
+                        </ul>
+                        
+                        
+                    </div>
+                    <div class="col-sm-3">
+                        <p><b>Forma de pagamento</b></p>
+                        <p th:text="${venda.formaPagamento}">Pix</p>
+                    </div>
+                    <div class="col-sm-3">
+	                    <div class="card-body btnPagamento">
+	                    	<span class="totalFinalizarPedido">	            
+	            				Total:<b class="btotal" th:text="${#numbers.formatCurrency(venda.total())}"></b>            
+	            			</span>	
+	                    
+	                    	 <button id="finalizarCompra" class="btn btn-warning ">Confirmar Pedido</button><!--/vendas/save-->
+              				<p class="text">Ao fazer seu pedido, você concorda com as Condições de Uso da Loja.</p>
+	                    </div>                     
+                    </div>
+                </div>
+            </div>
+          </div>
+          <br>
+          
+          		<input type="hidden" id="md" data-toggle="modal" data-target="#modal-alert" />
+				<span th:replace="fragments/modal-alert :: modal-alert"></span>
+			
+			<div class="card" style="width: 100%;">
+	            <div class="card-body item">
+	               	 <table>               	 
+	               	 	<tbody>
+	               	 		<tr th:each="item :  ${venda.itemVendas}">            	 			
+	               	 			<td><img class="imagemList"  th:src="|/produtos/imagem/${item.produto.id}|"alt="imagem do Produto"></td>
+	               	 			<td th:text="${#strings.abbreviate(item.produto.descricao, 50)}">Memoria Ram 16gb 3000mhz</td>
+	               	 			<td>|Quantidade <b th:text="${item.quantidade}">1</b> |</td>
+	               	 			<td class="corValor" th:text="${#numbers.formatCurrency(item.produto.valor)}">R$ 5000</td>
+	               	 		</tr>	               	 	
+	               	 	</tbody>
+	               	 </table>             
+	            </div>			
+            </div>
+         
+			<br>
+         
+		</section>
+</body>
+</html>

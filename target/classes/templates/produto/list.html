@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+<head>
+<meta charset="utf-8">
+</head>
+<body>
+	<div class="container layout-card" layout:fragment="corpo">
+
+		<div class="row" id="listaProdutos">		
+			 
+				<div class="card-group col-sm-3 pb-4" th:each="p : ${produtos}">
+					<form th:action="@{/vendas/add}" th:object="${item}" method="Post" class="classForm">
+						<div th:id="${p.id}" class="card">
+							
+							<div class="block-img">						
+							
+								<img class="card-img-top"  th:src="|/produtos/imagem/${p.id}|"alt="imagem do Produto">
+							
+							</div>
+							 
+							<div class="card-body">
+								<div>
+									<p>
+									<a  th:href="@{/produtos/descricao/detalhes/{id} (id=${p.id})}" class="card-subtitle mb-2 text-muted descr" 
+										th:text="${#strings.abbreviate(p.descricao, 40)}"> </a></p>
+								
+								</div>
+								<div>
+									<input type="hidden" th:value="${p.id}" th:name="produto.id">
+								</div>								
+								<div>
+									<h6 class="badge badge-primary badValor" th:text="|R$ ${{p.valor}}|">R$ 9,99</h6>
+								</div>
+								<div class="btn-group">
+									
+									<a th:href="@{/produtos/remove/{id} (id=${p.id})}" sec:authorize="hasRole('ADMIN')" class="btn btn-sm btn-outline-secondary"
+									 onclick="return window.confirm('Tem certeza que deseja excluir este Produto?')"><i class="fas fa-times "></i></a>
+									<a th:href="@{/produtos/edit/{id} (id=${p.id})}" sec:authorize="hasRole('ADMIN')" class="btn btn-sm btn-outline-secondary"><i class="fas fa-edit "></i></a>
+									
+								</div>
+							</div>   <!--ANONIMO E USER PODEM COMPRAR PRODUTOS -->
+							<div class="card-footer" sec:authorize="hasRole('USER')">
+								<button type="submit" class="btn btn-warning btn-Largo">Comprar <i class="fas fa-cart-plus"></i></button>
+							</div>
+							<div class="card-footer" sec:authorize="hasRole('ROLE_ANONYMOUS')">
+								<button type="submit" class="btn btn-warning btn-Largo">Comprar <i class="fas fa-cart-plus"></i></button>
+							</div>
+						</div>
+					</form>
+				</div> 
+				<div id="loader-img" class="mx-auto loader"></div>
+		</div>
+	
+	<div class="container">
+		<div class="row" >
+			<div class="col-sm-4"></div>
+			<div class="col-sm-4 botaoLayout">
+				<button id="verMaisProdutos" class="btn btn-info">Ver Mais!</button>
+			</div>
+			<div class="col-sm-4"></div>
+		</div> 
+	</div>
+		
+		
+	</div>
+</body>
+</html>
